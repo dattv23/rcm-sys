@@ -19,4 +19,7 @@ def clean_text(text):
 
 
 def normalize_repeated_chars(text):
-    return " ".join([re.sub(r"(.)\1{1,}", r"\1", word) for word in text.split()])
+    def remove_tail_repeat(word):
+        return re.sub(r"(.)\1{1,}$", r"\1", word)
+
+    return " ".join(remove_tail_repeat(word) for word in text.split())
